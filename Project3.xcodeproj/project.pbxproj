@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		4F798B9B26B88E9900D48DC6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798B9A26B88E9900D48DC6 /* main.cpp */; };
+		4F798BC426B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BBF26B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib */; };
+		4F798BC526B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BBF26B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BC626B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BC026B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib */; };
+		4F798BC726B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BC026B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BC826B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BC126B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib */; };
+		4F798BC926B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BC126B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BCA26B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BC226B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib */; };
+		4F798BCB26B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BC226B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BCC26B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BC326B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib */; };
+		4F798BCD26B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BC326B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BD026B8A0D600D48DC6 /* libtgui.0.9.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F798BCF26B8A0D600D48DC6 /* libtgui.0.9.1.dylib */; };
+		4F798BD126B8A0D600D48DC6 /* libtgui.0.9.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F798BCF26B8A0D600D48DC6 /* libtgui.0.9.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F798BD526B8A60B00D48DC6 /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BD426B8A60B00D48DC6 /* FileManager.cpp */; };
+		4F798BD826B8A61200D48DC6 /* FlightEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BD726B8A61200D48DC6 /* FlightEdge.cpp */; };
+		4F798BDB26B8A61A00D48DC6 /* FlightGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BDA26B8A61A00D48DC6 /* FlightGraph.cpp */; };
+		4F798BDE26B8A62800D48DC6 /* BellmanFordAlgo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BDD26B8A62800D48DC6 /* BellmanFordAlgo.cpp */; };
+		4F798BE126B8A63100D48DC6 /* DjikstrasModAlgo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BE026B8A63100D48DC6 /* DjikstrasModAlgo.cpp */; };
+		4F798BE426B8A63800D48DC6 /* FloydWarshallAlgo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F798BE326B8A63800D48DC6 /* FloydWarshallAlgo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,11 +38,55 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		4F798BCE26B8A0BD00D48DC6 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F798BC926B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib in Embed Libraries */,
+				4F798BCB26B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib in Embed Libraries */,
+				4F798BCD26B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib in Embed Libraries */,
+				4F798BD126B8A0D600D48DC6 /* libtgui.0.9.1.dylib in Embed Libraries */,
+				4F798BC726B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib in Embed Libraries */,
+				4F798BC526B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F798B9726B88E9900D48DC6 /* Project3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project3; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F798B9A26B88E9900D48DC6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4F798BA426B891CB00D48DC6 /* Project3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Project3.entitlements; sourceTree = "<group>"; };
+		4F798BA726B89BB000D48DC6 /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "ExternalLibraries/sfml/2.5.1_1/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BA826B89BB000D48DC6 /* libsfml-graphics.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-graphics.2.5.1.dylib"; path = "ExternalLibraries/sfml/2.5.1_1/lib/libsfml-graphics.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BA926B89BB000D48DC6 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "ExternalLibraries/sfml/2.5.1_1/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BAA26B89BB000D48DC6 /* libsfml-network.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.5.1.dylib"; path = "ExternalLibraries/sfml/2.5.1_1/lib/libsfml-network.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BAB26B89BB000D48DC6 /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "ExternalLibraries/sfml/2.5.1_1/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BB826B89BD300D48DC6 /* libtgui.0.9.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtgui.0.9.1.dylib; path = ExternalLibraries/tgui/0.9.1/lib/libtgui.0.9.1.dylib; sourceTree = "<group>"; };
+		4F798BBF26B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-graphics.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-graphics.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BC026B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BC126B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-network.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BC226B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BC326B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
+		4F798BCF26B8A0D600D48DC6 /* libtgui.0.9.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtgui.0.9.1.dylib; path = ExternalLibraries/tgui/lib/libtgui.0.9.1.dylib; sourceTree = "<group>"; };
+		4F798BD426B8A60B00D48DC6 /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
+		4F798BD626B8A60E00D48DC6 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		4F798BD726B8A61200D48DC6 /* FlightEdge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlightEdge.cpp; sourceTree = "<group>"; };
+		4F798BD926B8A61600D48DC6 /* FlightEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightEdge.h; sourceTree = "<group>"; };
+		4F798BDA26B8A61A00D48DC6 /* FlightGraph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlightGraph.cpp; sourceTree = "<group>"; };
+		4F798BDC26B8A61E00D48DC6 /* FlightGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightGraph.h; sourceTree = "<group>"; };
+		4F798BDD26B8A62800D48DC6 /* BellmanFordAlgo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BellmanFordAlgo.cpp; sourceTree = "<group>"; };
+		4F798BDF26B8A62C00D48DC6 /* BellmanFordAlgo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BellmanFordAlgo.h; sourceTree = "<group>"; };
+		4F798BE026B8A63100D48DC6 /* DjikstrasModAlgo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DjikstrasModAlgo.cpp; sourceTree = "<group>"; };
+		4F798BE226B8A63400D48DC6 /* DjikstrasModAlgo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DjikstrasModAlgo.h; sourceTree = "<group>"; };
+		4F798BE326B8A63800D48DC6 /* FloydWarshallAlgo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FloydWarshallAlgo.cpp; sourceTree = "<group>"; };
+		4F798BE526B8A63B00D48DC6 /* FloydWarshallAlgo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloydWarshallAlgo.h; sourceTree = "<group>"; };
+		4F798BE726B8A8B400D48DC6 /* Test Flight Data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Test Flight Data.csv"; sourceTree = "<group>"; };
+		4F798BE826B8A9A500D48DC6 /* locations.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = locations.txt; sourceTree = "<group>"; };
+		4F798BE926B8A9A500D48DC6 /* airlines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = airlines.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +94,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F798BC826B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib in Frameworks */,
+				4F798BCA26B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib in Frameworks */,
+				4F798BCC26B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib in Frameworks */,
+				4F798BD026B8A0D600D48DC6 /* libtgui.0.9.1.dylib in Frameworks */,
+				4F798BC626B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib in Frameworks */,
+				4F798BC426B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +111,7 @@
 			children = (
 				4F798B9926B88E9900D48DC6 /* Project3 */,
 				4F798B9826B88E9900D48DC6 /* Products */,
+				4F798BA126B88F6D00D48DC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +126,44 @@
 		4F798B9926B88E9900D48DC6 /* Project3 */ = {
 			isa = PBXGroup;
 			children = (
+				4F798BE826B8A9A500D48DC6 /* locations.txt */,
+				4F798BE726B8A8B400D48DC6 /* Test Flight Data.csv */,
+				4F798BA426B891CB00D48DC6 /* Project3.entitlements */,
 				4F798B9A26B88E9900D48DC6 /* main.cpp */,
+				4F798BE926B8A9A500D48DC6 /* airlines.txt */,
+				4F798BD426B8A60B00D48DC6 /* FileManager.cpp */,
+				4F798BD626B8A60E00D48DC6 /* FileManager.h */,
+				4F798BD726B8A61200D48DC6 /* FlightEdge.cpp */,
+				4F798BD926B8A61600D48DC6 /* FlightEdge.h */,
+				4F798BDA26B8A61A00D48DC6 /* FlightGraph.cpp */,
+				4F798BDC26B8A61E00D48DC6 /* FlightGraph.h */,
+				4F798BDD26B8A62800D48DC6 /* BellmanFordAlgo.cpp */,
+				4F798BDF26B8A62C00D48DC6 /* BellmanFordAlgo.h */,
+				4F798BE026B8A63100D48DC6 /* DjikstrasModAlgo.cpp */,
+				4F798BE226B8A63400D48DC6 /* DjikstrasModAlgo.h */,
+				4F798BE326B8A63800D48DC6 /* FloydWarshallAlgo.cpp */,
+				4F798BE526B8A63B00D48DC6 /* FloydWarshallAlgo.h */,
 			);
 			path = Project3;
+			sourceTree = "<group>";
+		};
+		4F798BA126B88F6D00D48DC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F798BCF26B8A0D600D48DC6 /* libtgui.0.9.1.dylib */,
+				4F798BC226B8A0BD00D48DC6 /* libsfml-audio.2.5.1.dylib */,
+				4F798BBF26B8A0BD00D48DC6 /* libsfml-graphics.2.5.1.dylib */,
+				4F798BC126B8A0BD00D48DC6 /* libsfml-network.2.5.1.dylib */,
+				4F798BC326B8A0BD00D48DC6 /* libsfml-system.2.5.1.dylib */,
+				4F798BC026B8A0BD00D48DC6 /* libsfml-window.2.5.1.dylib */,
+				4F798BB826B89BD300D48DC6 /* libtgui.0.9.1.dylib */,
+				4F798BA726B89BB000D48DC6 /* libsfml-audio.2.5.1.dylib */,
+				4F798BA826B89BB000D48DC6 /* libsfml-graphics.2.5.1.dylib */,
+				4F798BAA26B89BB000D48DC6 /* libsfml-network.2.5.1.dylib */,
+				4F798BAB26B89BB000D48DC6 /* libsfml-system.2.5.1.dylib */,
+				4F798BA926B89BB000D48DC6 /* libsfml-window.2.5.1.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,6 +176,7 @@
 				4F798B9326B88E9900D48DC6 /* Sources */,
 				4F798B9426B88E9900D48DC6 /* Frameworks */,
 				4F798B9526B88E9900D48DC6 /* CopyFiles */,
+				4F798BCE26B8A0BD00D48DC6 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -118,7 +223,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F798BDB26B8A61A00D48DC6 /* FlightGraph.cpp in Sources */,
+				4F798BE426B8A63800D48DC6 /* FloydWarshallAlgo.cpp in Sources */,
+				4F798BE126B8A63100D48DC6 /* DjikstrasModAlgo.cpp in Sources */,
 				4F798B9B26B88E9900D48DC6 /* main.cpp in Sources */,
+				4F798BD826B8A61200D48DC6 /* FlightEdge.cpp in Sources */,
+				4F798BDE26B8A62800D48DC6 /* BellmanFordAlgo.cpp in Sources */,
+				4F798BD526B8A60B00D48DC6 /* FileManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,9 +350,18 @@
 		4F798B9F26B88E9900D48DC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Project3/Project3.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CCM685L5TA;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/ExternalLibraries/SFML/include",
+					"${SRCROOT}/ExternalLibraries/tgui/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibraries/SFML/lib",
+					"$(PROJECT_DIR)/ExternalLibraries/tgui/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -249,9 +369,18 @@
 		4F798BA026B88E9900D48DC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Project3/Project3.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CCM685L5TA;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/ExternalLibraries/SFML/include",
+					"${SRCROOT}/ExternalLibraries/tgui/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibraries/SFML/lib",
+					"$(PROJECT_DIR)/ExternalLibraries/tgui/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
