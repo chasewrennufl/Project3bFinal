@@ -16,12 +16,12 @@ struct FlightGraph
 {
 public:
 
-    map<short, vector<FlightEdge>> graph;
+    map<short, vector<FlightEdge>> graph; //adjacency list
 
-    int V;
-    int E;
+    int V; //# of vertices
+    int E; //# of edges
 
-    FlightGraph();
+    FlightGraph(); 
 
     void insertFlightEdge(FlightEdge& e);
     bool isFlight(FlightEdge& e);
@@ -37,8 +37,8 @@ public:
     short getACfromLoc(string loc);
     string routeText(vector<FlightEdge> route);
 
-    map<string, short> WAC;
-    map<string, string> airlines;
+    map<string, short> WAC; //map from a location to that locations WAC (world area code)
+    map<string, string> airlines; //map from code of airline (keys i.e. "AA") to airline (values) (i.e. American Airline)
 
 };
 

@@ -1,7 +1,3 @@
-//
-// Created by Chase Wrenn on 7/31/21.
-//
-
 #include "BellmanFordAlgo.h"
 
 void BellmanFordAlgo::bellmanFord(FlightGraph *g, short source) {
@@ -9,19 +5,19 @@ void BellmanFordAlgo::bellmanFord(FlightGraph *g, short source) {
     int V = g->V;
     int E = g->E;
 
-    for (auto itr = g->graph.begin(); itr != g->graph.end(); itr++) {
-        d[itr->first] = DBL_MAX;
+    for (auto itr = g->graph.begin(); itr != g->graph.end(); itr++) { //for all vertices
+        d[itr->first] = DBL_MAX; //assigning our d and b
         p[itr->first] = 0;
     }
-    d[source] = 0;
-
-    for (int i = 1; i <= V-1; i++) {
-        for (auto itr = g->graph.begin(); itr != g->graph.end(); itr++) {
-            for (int j = 0; j < itr->second.size(); j++) {
-                short u = itr->second.at(j).originWAC;
-                short v = itr->second.at(j).destWAC;
-                double weight = itr->second.at(j).price;
-                if (d[u] != DBL_MAX && d[u] + weight < d[v]) {
+    d[source] = 0; //initialize our source
+	//Basically will run all potential combinations as opposed to the heuristically driven Dijkstra, shown by running the whole double for loop V-1 times
+    for (int i = 1; i <= V-1; i++) { // run for V-1 times
+        for (auto itr = g->graph.begin(); itr != g->graph.end(); itr++) { //for all vertices
+            for (int j = 0; j < itr->second.size(); j++) { //for all edges at vertice
+                short u = itr->second.at(j).originWAC; //assign temp origin
+                short v = itr->second.at(j).destWAC; //assign temp destination
+                double weight = itr->second.at(j).price; //assign temp weight
+                if (d[u] != DBL_MAX && d[u] + weight < d[v]) { //relaxation
                     d[v]= d[u] + weight;
                     p[v] = u;
                 }
@@ -55,7 +51,7 @@ vector<FlightEdge> BellmanFordAlgo::calculateRoute(FlightGraph *g, short source,
             }
         }
         vector<FlightEdge> cur = getCurrentPath(g, src, end, reached); //backtracks through d and p maps to create path
-        //WORKS TO HERE
+
         for (int i = cur.size()-1; i >= 0; i--) { //go through backtrack backwards for correct order
             result.push_back(cur.at(i));
         }

@@ -1,7 +1,3 @@
-//
-// Created by Chase Wrenn on 7/22/21.
-//
-
 #ifndef PROJECT3_TRAVEL_OPTIMIZATION_FLIGHTEDGE_H
 #define PROJECT3_TRAVEL_OPTIMIZATION_FLIGHTEDGE_H
 
@@ -13,11 +9,11 @@ struct FlightEdge
     short quarter;
 
     //Using area codes from data to minimize storage
-    short originWAC;
-    short destWAC;
+    short originWAC; //code for origin location
+    short destWAC; //code for destination location
 
 
-    std::string airlineCode;
+    std::string airlineCode; //two letter code for airline
     double price;
 };
 

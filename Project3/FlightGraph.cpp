@@ -1,7 +1,3 @@
-//
-// Created by Chase Wrenn on 7/22/21.
-//
-
 #include <vector>
 #include <sstream>
 #include "FlightGraph.h"
@@ -9,7 +5,7 @@
 
 FlightGraph::FlightGraph() {
 
-    string string1 = "1 Alaska\n"
+    string string1 = "1 Alaska\n" //Each provides WAC and location pair
                      "2 Hawaii\n"
                      "3 Puerto Rico\n"
                      "4 U.S. Virgin Islands\n"
@@ -70,10 +66,10 @@ FlightGraph::FlightGraph() {
         int index = line.find(' ');
         short AC = stoi(line.substr(0,index));
         string loc = line.substr(index+1, line.size());
-        WAC.insert(make_pair(loc, AC));
+        WAC.insert(make_pair(loc, AC)); //make the WAC (world area code) and location a pair and add to map
     }
 
-    string string2 = "WN Southwest Airlines Co.\n"
+    string string2 = "WN Southwest Airlines Co.\n" //each line has pair of airline code and airline
                      "DL Delta Air Lines Inc.\n"
                      "AA American Airlines Inc.\n"
                      "UA United Air Lines Inc.\n"
@@ -92,7 +88,7 @@ FlightGraph::FlightGraph() {
         int index = line2.find(' ');
         string code = line2.substr(0,index);
         string name = line2.substr(index+1, line2.size());
-        airlines.insert(make_pair(code, name));
+        airlines.insert(make_pair(code, name)); //make pair of airline code and airline, add to map
     }
 
     V = 0;
@@ -102,37 +98,37 @@ FlightGraph::FlightGraph() {
 
 void FlightGraph::insertFlightEdge(FlightEdge &e)
 {
-    if (graph.find(e.originWAC) == graph.end()) {
-        graph[e.originWAC] = {};
-        V++;
+    if (graph.find(e.originWAC) == graph.end()) {//if origin WAC not in map
+        graph[e.originWAC] = {}; //add to map
+        V++; //++ number of vertices
     }
-    if (graph.find(e.destWAC) == graph.end()) {
-        graph[e.destWAC] = {};
-        V++;
+    if (graph.find(e.destWAC) == graph.end()) {//if destination WAC not in map
+        graph[e.destWAC] = {}; //add to map
+        V++;//++ number of vertices
 
     }
-    graph[e.originWAC].push_back(e);
-    E++;
+    graph[e.originWAC].push_back(e); //add the edge to the adjacency list "graph"
+    E++; //++ number of edges
 
 }
 
-bool FlightGraph::isFlight(FlightEdge &e) {
+bool FlightGraph::isFlight(FlightEdge &e) { //unused
     //Search in flightgraph if there exists in 
     // flight x = graph[e.originWAC]
     return false;
 }
 
-bool FlightGraph::isFlight(short src, short dest)
+bool FlightGraph::isFlight(short src, short dest) //check to see if flight exists
 {
     for (int i = 0; i < graph[src].size(); i++)
     {
-        if (graph[src].at(i).originWAC == src && graph[src].at(i).destWAC == dest)
+        if (graph[src].at(i).originWAC == src && graph[src].at(i).destWAC == dest) //if there is a flight with same origin/destination
             return true;
     }
     return false;
 }
 
-double FlightGraph::getPrice(string src, string dest) {
+double FlightGraph::getPrice(string src, string dest) { //unused
     return 0.0;
 }
 
@@ -141,22 +137,22 @@ vector<FlightEdge> FlightGraph::getFlightsFromLoc(short src) {
     return flights;
 }
 
-void FlightGraph::printGraph() {
+void FlightGraph::printGraph() { //this was used in debugging to help show the graph, we later just created a string for the GUI
     cout << "List of All Flights in Graph:" << endl;
     for (auto it = graph.begin(); it != graph.end(); ++it)
     {
         for (int i = 0; i < it->second.size(); i++)
-            cout << it->second.at(i).originWAC << "->" << it->second.at(i).destWAC << endl; //can add here more stuff w/ edges i.e. show Airport Name or Price
+            cout << it->second.at(i).originWAC << "->" << it->second.at(i).destWAC << endl; //print out the flight data
     }
 }
 
 string FlightGraph::getAirlineFromData(short src, short dest, double price) {
     string airline = "";
     bool found = false;
-    for (int i = 0; i < graph[src].size() && !found; i++) {
-        FlightEdge e = graph[src].at(i);
-        if (e.originWAC == src && e.destWAC == dest && e.price == price) {
-            airline = e.airlineCode;
+    for (int i = 0; i < graph[src].size() && !found; i++) { //for all edges at vertex
+        FlightEdge e = graph[src].at(i); //get one flightedge
+        if (e.originWAC == src && e.destWAC == dest && e.price == price) { //check if flightedge is the one we want
+            airline = e.airlineCode; //get our airline
             found = true;
         }
     }
@@ -166,9 +162,9 @@ string FlightGraph::getAirlineFromData(short src, short dest, double price) {
 double FlightGraph::getWeight(short src, short dest)
 {
     double lowestWeight = std::numeric_limits<double>::max();
-    for (int i = 0; i < graph[src].size(); i++)
+    for (int i = 0; i < graph[src].size(); i++) //for all edges at src
     {
-        if (graph[src].at(i).destWAC = dest)
+        if (graph[src].at(i).destWAC = dest) //if correct dest
         {
             if (graph[src].at(i).price < lowestWeight)
                 lowestWeight = graph[src].at(i).price;
@@ -179,11 +175,11 @@ double FlightGraph::getWeight(short src, short dest)
 
 string FlightGraph::getLocFromAC(short AC) {
     string res = "";
-    for (auto itr = WAC.begin(); itr != WAC.end() && res == ""; itr++)
+    for (auto itr = WAC.begin(); itr != WAC.end() && res == ""; itr++) //for all vertices
     {
-        if (itr->second == AC)
+        if (itr->second == AC) //if we find the WAC we want
         {
-            res = itr->first;
+            res = itr->first; //return the location
         }
     }
     return res;
@@ -199,13 +195,13 @@ string FlightGraph::getAirlineFromCode(string code) {
 
 string FlightGraph::routeText(vector<FlightEdge> route) {
     string res;
-    for (int i = 0; i < route.size(); i++) {
-        FlightEdge e = route.at(i);
+    for (int i = 0; i < route.size(); i++) { //for all edges in our route
+        FlightEdge e = route.at(i); //assign flight edge
         std::stringstream stream;
-        stream << std::fixed << std::setprecision(2) << e.price;
+        stream << std::fixed << std::setprecision(2) << e.price; //for prices -> to two decimal places
          res += getLocFromAC(e.originWAC) + "--->" +
              getLocFromAC(e.destWAC) + "; Price: $" + stream.str() + "; Airline: " +
-             getAirlineFromCode(e.airlineCode) + "\n";
+             getAirlineFromCode(e.airlineCode) + "\n"; //create string
     }
     return res;
 }
