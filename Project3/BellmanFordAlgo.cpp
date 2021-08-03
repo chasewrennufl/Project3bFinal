@@ -33,16 +33,16 @@ vector<FlightEdge> BellmanFordAlgo::calculateRoute(FlightGraph *g, short source,
     vector<FlightEdge> result; //resulting vector in order
     //for each destination, map pair created with bool false to show location has not been reached
     for (int i = 0; i < dest.size(); i++) {
-        reached.insert(make_pair(dest.at(i), false));
+        reached.insert(make_pair(dest.at(i), false)); //set up our checks
     }
     bool fin = false; //tracks if all dest have been reached
-    while (!fin) {
+    while (!fin) { //while we have not reached all destinations
         fin = true; //set to true;
         double min = DBL_MAX;
         short end = 0;
         bellmanFord(g, src); //finds paths to all nodes
-        for (auto itr = d.begin(); itr != d.end(); itr++) {
-            auto destSet = reached.find(itr->first);
+        for (auto itr = d.begin(); itr != d.end(); itr++) { //for all nodes
+            auto destSet = reached.find(itr->first); //find out destination
             if (destSet != reached.end()) {
                 if (itr->second < min &&  !destSet->second) { //sets destination to minimum remaining destination
                     min = itr->second;
@@ -50,7 +50,7 @@ vector<FlightEdge> BellmanFordAlgo::calculateRoute(FlightGraph *g, short source,
                 }
             }
         }
-        vector<FlightEdge> cur = getCurrentPath(g, src, end, reached); //backtracks through d and p maps to create path
+        vector<FlightEdge> cur = getCurrentPath(g, src, end, reached); //backtracks through d and p maps to create path for minimum
 
         for (int i = cur.size()-1; i >= 0; i--) { //go through backtrack backwards for correct order
             result.push_back(cur.at(i));
@@ -58,33 +58,32 @@ vector<FlightEdge> BellmanFordAlgo::calculateRoute(FlightGraph *g, short source,
         for (auto itr = reached.begin(); itr != reached.end() && fin; itr++) { //check all dest have been reached
             fin = itr->second;
         }
-        src = result.at(result.size()-1).destWAC;
+        src = result.at(result.size()-1).destWAC; //assigns new source
     }
-    short finalDest = result.at(result.size()-1).destWAC;
+    short finalDest = result.at(result.size()-1).destWAC; //to get round trip, need to set last destination as one to origin
     map<short, bool> hold;
-    hold.insert(make_pair(source, false));
-    bellmanFord(g, finalDest);
+    hold.insert(make_pair(source, false)); 
+    bellmanFord(g, finalDest); //run bellmanFord one last time
     vector<FlightEdge> returnPath = getCurrentPath(g, finalDest, source, hold); //return back to original source
     for (int i = returnPath.size()-1; i >= 0; i--) {
-        result.push_back(returnPath.at(i));
+        result.push_back(returnPath.at(i)); //pushes the total path to the vector<FlightEdge>
     }
     return result; //return total path
-
 }
 
 vector<FlightEdge> BellmanFordAlgo::getCurrentPath(FlightGraph *g, short src, short dest, map<short, bool>& reached) {
     short cur = dest;
     vector<FlightEdge> path;
-    while (cur != src) {
-        reached[cur] = true;
-        short last = p[cur];
+    while (cur != src) { //while we haven't reached our source
+        reached[cur] = true; //we have reached current, in case we go back
+        short last = p[cur]; //from previous node
         FlightEdge edge;
-        edge.price = d[cur] - d[last];
-        edge.destWAC = cur;
+        edge.price = d[cur] - d[last]; //get the weight of this edge
+        edge.destWAC = cur; //our destination
         edge.originWAC = last;
         edge.airlineCode = g->getAirlineFromData(edge.originWAC,edge.destWAC, edge.price);
         path.push_back(edge);
-        cur = last;
+        cur = last; //go back to the origin of this edge and repeat algorithm until reach our source (src)
     }
     return path;
 }

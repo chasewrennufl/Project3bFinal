@@ -1,7 +1,3 @@
-//
-// Created by Chase Wrenn on 7/31/21.
-//
-
 #ifndef PROJECT3_TRAVEL_OPTIMIZATION_BELLMANFORDALGO_H
 #define PROJECT3_TRAVEL_OPTIMIZATION_BELLMANFORDALGO_H
 
@@ -9,9 +5,9 @@
 class BellmanFordAlgo {
 private:
 
-    map<short, double> d;
+    map<short, double> d; //keys are the WACs of the locations, values are the price to get to location from source
 
-    map<short, short> p;
+    map<short, short> p; //keys are WACs of locations, values are prev node in cheapest path from src
 
     vector<FlightEdge> route;
 
@@ -19,7 +15,7 @@ private:
 
 public:
 
-    void bellmanFord(FlightGraph* g, short source);
+    void bellmanFord(FlightGraph* g, short source); //within calculateRoute
 
     vector<FlightEdge> calculateRoute(FlightGraph* g, short source, vector<short> dest);
 
