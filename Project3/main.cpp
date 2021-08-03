@@ -71,7 +71,7 @@ void loadWidgets(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointBu
     vector <tgui::Button::Ptr>& quarterButtons, tgui::Button::Ptr& computeButton, map<string, string>& airlineData, map <string, int>& locationData, string* startPointPointer, set<string>* destinationsPointer,
     set<string>* airLinesPointer, string* quarterPointer)
 {
-    tgui::Theme::setDefault("C:/APIs/TGUI-0.9/themes/BabyBlue.txt");
+    tgui::Theme::setDefault("BabyBlue.txt");
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create Starting point scrollbar
@@ -280,7 +280,7 @@ void createOutput(tgui::GuiBase& gui, string* outputPointer)
     auto listBox2 = tgui::ListBox::create();
     listBox2->setSize(500, 250);
     listBox2->setPosition(650, 350);
-    listBox2->setItemHeight(50);
+    listBox2->setItemHeight(100);
     listBox2->addItem(*outputPointer);
 
     gui.add(listBox2);
@@ -476,7 +476,7 @@ int main()
     bool redrawInputOutput;
     bool* redrawInputOutputPointer = &redrawInputOutput;
 
-    sf::RenderWindow window(sf::VideoMode(1200, 650), "TGUI window");
+    sf::RenderWindow window(sf::VideoMode(1200, 650), "Flight Optimization Project 3b");
 
 
     readData(airlineData, locationData); //read data
