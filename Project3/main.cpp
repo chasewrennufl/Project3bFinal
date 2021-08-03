@@ -1,13 +1,4 @@
-//
-//  main.cpp
-//  Project3
-//
-//  Created by Chase Wrenn on 8/2/21.
-//
-
-
-// Project3.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+//Created by Rishi Sajay
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -32,6 +23,7 @@ using namespace std;
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//load data
 void readData(map <string, string>& airLineData, map <string, int>& locationData)
 {
     //read airline data
@@ -48,12 +40,11 @@ void readData(map <string, string>& airLineData, map <string, int>& locationData
         if (ID != "")
         {
             airLineData[name] = ID;
-            //cout << airLineData[name];
         }
     }
     myFile.close();
 
-    //read locaiton data
+    //read location data
     string filePathLocations = "locations.txt";
     ifstream myFile2(filePathLocations);
     while (getline(myFile2, lineFromFile))
@@ -80,8 +71,7 @@ void loadWidgets(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointBu
     vector <tgui::Button::Ptr>& quarterButtons, tgui::Button::Ptr& computeButton, map<string, string>& airlineData, map <string, int>& locationData, string* startPointPointer, set<string>* destinationsPointer,
     set<string>* airLinesPointer, string* quarterPointer)
 {
-    tgui::Theme::setDefault("BabyBlue.txt");
-    //tgui::Theme blackTheme{ "C:/APIs/TGUI-0.9/themes/Black.txt" };
+    tgui::Theme::setDefault("C:/APIs/TGUI-0.9/themes/BabyBlue.txt");
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create Starting point scrollbar
@@ -172,7 +162,6 @@ void loadWidgets(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointBu
     {
         tgui::Button::Ptr button = tgui::Button::create();
         button->setText(iter3->first);
-        //cout << iter3->first << endl;
         button->setSize(250, 25);
         button->setPosition(0, i3 * 25);
         airlineButtons.push_back(button);
@@ -205,13 +194,13 @@ void loadWidgets(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointBu
         tgui::Button::Ptr button = tgui::Button::create();
         button->setText(to_string(i));
         button->setSize(250, 25);
-        button->setPosition(0, (i-1) * 25);
+        button->setPosition(0, (i - 1) * 25);
         quarterButtons.push_back(button);
         quartersPanel->add(button);
     }
     quartersPanel->setHorizontalScrollbarPolicy(tgui::Scrollbar::Policy::Never);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+
     //create calculate button
     tgui::Button::Ptr button = tgui::Button::create();
     button->setSize(500, 50);
@@ -221,6 +210,10 @@ void loadWidgets(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointBu
     gui.add(button);
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//create input/output
+
+//create input
 void createInput(tgui::GuiBase& gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer)
 {
     //Create input window
@@ -268,10 +261,11 @@ void createInput(tgui::GuiBase& gui, string* startPointPointer, set<string>* des
             listBox1->addItem("                      " + *iter);
         }
     }
-    
+
     gui.add(listBox1);
 }
 
+//create output
 void createOutput(tgui::GuiBase& gui, string* outputPointer)
 {
     //Create input window
@@ -286,7 +280,7 @@ void createOutput(tgui::GuiBase& gui, string* outputPointer)
     auto listBox2 = tgui::ListBox::create();
     listBox2->setSize(500, 250);
     listBox2->setPosition(650, 350);
-    listBox2->setItemHeight(100);
+    listBox2->setItemHeight(50);
     listBox2->addItem(*outputPointer);
 
     gui.add(listBox2);
@@ -296,8 +290,7 @@ void createOutput(tgui::GuiBase& gui, string* outputPointer)
 //Actual computations
 
 
-
-
+//compute cheapest paths
 string compute(string* startPointPointer, set<string>* destinationsPointer, set<string>* airlinePointer, string* quarterPointer)
 {
     FileManager f;
@@ -315,21 +308,24 @@ string compute(string* startPointPointer, set<string>* destinationsPointer, set<
     {
         dest.push_back((flightGraph.getACfromLoc(*it)));
     }
-    f.buildGraph("Cleaned_2018_Flights.csv", q, airlines, flightGraph);
+    f.buildGraph("Cleaned_2018_Flights.csv", q, airlines, flightGraph); //build graph
     BellmanFordAlgo bellmanFordAlgo;
     DjikstrasModAlgo djikstra;
     vector<FlightEdge> route, route2;
 
+    //run Djikstra
     auto start = std::chrono::high_resolution_clock::now();
     route = djikstra.calculateRoute(&flightGraph, flightGraph.WAC[src], dest);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
+    //run Bellman Ford
     auto start2 = std::chrono::high_resolution_clock::now();
     route2 = bellmanFordAlgo.calculateRoute(&flightGraph, flightGraph.WAC[src], dest);
     auto stop2 = std::chrono::high_resolution_clock::now();
     auto duration2 = chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
 
+    //store output
     string output = "\n\n\n\nBellman Ford Algorithm Time: " + to_string(duration2.count());
     output = output + " microseconds\nDijkstra Algorithm Time: ";
     output = output + to_string(duration.count()) + " microseconds\n";
@@ -342,14 +338,15 @@ string compute(string* startPointPointer, set<string>* destinationsPointer, set<
 //button pressed functions
 
 
+//starting point buttons pressed
 void startingPointPressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, tgui::String buttonText)
 {
     std::string strUtf8(buttonText);
     *startPointPointer = strUtf8;
     createInput(*gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
-    //cout << *startPointPointer;
 }
 
+//destination buttons pressed
 void destinationPressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, tgui::String buttonText)
 {
     std::string strUtf8(buttonText);
@@ -365,7 +362,7 @@ void destinationPressed(tgui::GuiBase* gui, string* startPointPointer, set<strin
     createInput(*gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
 }
 
-
+//airline buttons pressed
 void airlinePressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, tgui::String buttonText)
 {
     std::string strUtf8(buttonText);
@@ -379,20 +376,18 @@ void airlinePressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* 
         airLinesPointer->erase(strUtf8);
     }
     createInput(*gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
-    //cout << *airLinePointer;
 }
 
+//quarter buttons pressed
 void quarterPressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, tgui::String buttonText)
 {
     std::string strUtf8(buttonText);
     *quarterPointer = strUtf8;
     createInput(*gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
-    //cout << *quarterPointer;
 }
 
 void computePressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, string* outputPointer, map <string, string>* airlineDataFinal)
 {
-    //int startPointFinal = (*locationData)[*startPointPointer];
     set <string> airlinesFinal;
     auto iter = airLinesPointer->begin();
     for (iter; iter != airLinesPointer->end(); iter++)
@@ -401,32 +396,27 @@ void computePressed(tgui::GuiBase* gui, string* startPointPointer, set<string>* 
         airlinesFinal.insert(airlineCode);
     }
     set<string>* airlinesFinalPointer = &airlinesFinal;
-    //cout << airlineFinal;
 
     string output = compute(startPointPointer, destinationsPointer, airlinesFinalPointer, quarterPointer);
     *outputPointer = output;
     createOutput(*gui, outputPointer); //prints output. Do this after storing the output in *outputPointer, don't change this method
 
-    //clear all data
-    //*startPointPointer = "";
-    //destinationsPointer->clear();
-    //*airLinePointer = "";
-    //*quarterPointer = "";
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-
+//run all above methods
 bool runCode(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointButtons, vector <tgui::Button::Ptr>& destinationButtons, vector <tgui::Button::Ptr>& airlineButtons, vector <tgui::Button::Ptr>& quarterButtons,
     tgui::Button::Ptr& computeButton, map<string, string>& airlineData, map <string, int>& locationData, string* startPointPointer, set<string>* destinationsPointer, set<string>* airLinesPointer, string* quarterPointer, string* outputPointer)
 {
-    map <string, string>* airlineDataFinal = &airlineData;
-    //cout << (*airlineDataFinal)["American Airlines Inc."];
+    map <string, string>* airlineDataFinal = &airlineData; //helps convert airlines to airline codes
     try
     {
         loadWidgets(gui, startingPointButtons, destinationButtons, airlineButtons, quarterButtons, computeButton, airlineData, locationData, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
         createInput(gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
         createOutput(gui, outputPointer);
+
+        //check all buttons for if pressed
         for (int i = 0; i < startingPointButtons.size(); i++)
         {
             startingPointButtons[i]->onPress(&startingPointPressed, &gui, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer);
@@ -455,6 +445,7 @@ bool runCode(tgui::GuiBase& gui, vector <tgui::Button::Ptr>& startingPointButton
 
 int main()
 {
+    //all data structures except for the graph
     vector <tgui::Button::Ptr> startingPointButtons;
     vector <tgui::Button::Ptr> destinationButtons;
     vector <tgui::Button::Ptr> airlineButtons;
@@ -485,174 +476,20 @@ int main()
     bool redrawInputOutput;
     bool* redrawInputOutputPointer = &redrawInputOutput;
 
-    sf::RenderWindow window(sf::VideoMode(1200, 650), "Flight Optimization Project 3B");
+    sf::RenderWindow window(sf::VideoMode(1200, 650), "TGUI window");
 
-    //read data
-    readData(airlineData, locationData);
+
+    readData(airlineData, locationData); //read data
 
     tgui::Gui gui(window);
 
+    //runs all methods
     if (!runCode(gui, startingPointButtons, destinationButtons, airlineButtons, quarterButtons, computeButton, airlineData, locationData, startPointPointer, destinationsPointer, airLinesPointer, quarterPointer, outputPointer))
         return EXIT_FAILURE;
 
-    gui.mainLoop();
+    gui.mainLoop(); //gui loop
 
     return EXIT_SUCCESS;
 }
 
 
-/*
-#include <iostream>
-#include <sstream>
-#include "Data/FileManager.h"
-#include "Function/BellmanFordAlgo.h"
-#include "Function/DjikstrasModAlgo.h"
-#include <chrono>
-
-using namespace std;
-
-int main() {
-    FileManager f;
-    FlightGraph flightGraph;
-    bool incomplete = true;
-    short q;
-    string src;
-    vector<short> dest;
-    map<string, bool> airlines;
-    cout << "Welcome to Travel Optimization BETA!" << endl;
-    while (incomplete) {
-        cout << "Please enter the quarter of the year "
-            "you would like to take your trip:" << endl;
-        cin >> q;
-        if (q < 0 || q > 4) {
-            cout << "Error! Quarter must be between 1 and 4!" << endl;
-            q = 0;
-        }
-        else
-            incomplete = false;
-    }
-    cout << "Please enter the source of the trip:" << endl;
-    cin >> src;
-    cout << "Enter Airline codes of airlines you would like to use,"
-        " separated by a comma. (Ex: WN,DL):" << endl;
-    cout << "WN Southwest Airlines Co.\n"
-        "DL Delta Air Lines Inc.\n"
-        "AA American Airlines Inc.\n"
-        "UA United Air Lines Inc.\n"
-        "B6 JetBlue Airways\n"
-        "AS Alaska Airlines Inc.\n"
-        "NK Spirit Air Lines\n"
-        "G4 Allegiant Air\n"
-        "F9 Frontier Airlines Inc.\n"
-        "HA Hawaiian Airlines Inc.\n"
-        "SY Sun Country Airlines d/b/a MN Airlines\n"
-        "VX Virgin America";
-    string str;
-    cin >> str;
-    stringstream ss(str);
-    while (ss.good()) {
-        string substr;
-        getline(ss, substr, ',');
-        airlines.insert(make_pair(substr, true));
-    }
-    cout << "Enter Area Codes of locations you would like to go to, "
-        "separated by a comma. (Ex: 2,13):" << endl;
-    cout << "1 Alaska\n"
-        "2 Hawaii\n"
-        "3 Puerto Rico\n"
-        "4 U.S. Virgin Islands\n"
-        "5 U.S. Pacific Trust Territories and Possessions\n"
-        "11 Connecticut\n"
-        "12 Maine\n"
-        "13 Massachusetts\n"
-        "14 New Hampshire\n"
-        "15 Rhode Island\n"
-        "16 Vermont\n"
-        "21 New Jersey\n"
-        "22 New York\n"
-        "23 Pennsylvania\n"
-        "31 Delaware\n"
-        "32 District of Columbia\n"
-        "33 Florida\n"
-        "34 Georgia\n"
-        "35 Maryland\n"
-        "36 North Carolina\n"
-        "37 South Carolina\n"
-        "38 Virginia\n"
-        "39 West Virginia\n"
-        "41 Illinois\n"
-        "42 Indiana\n"
-        "43 Michigan\n"
-        "44 Ohio\n"
-        "45 Wisconsin\n"
-        "51 Alabama\n"
-        "52 Kentucky\n"
-        "53 Mississippi\n"
-        "54 Tennessee\n"
-        "61 Iowa\n"
-        "62 Kansas\n"
-        "63 Minnesota\n"
-        "64 Missouri\n"
-        "65 Nebraska\n"
-        "66 North Dakota\n"
-        "67 South Dakota\n"
-        "71 Arkansas\n"
-        "72 Louisiana\n"
-        "73 Oklahoma\n"
-        "74 Texas\n"
-        "81 Arizona\n"
-        "82 Colorado\n"
-        "83 Idaho\n"
-        "84 Montana\n"
-        "85 Nevada\n"
-        "86 New Mexico\n"
-        "87 Utah\n"
-        "88 Wyoming\n"
-        "91 California\n"
-        "92 Oregon\n"
-        "93 Washington";
-    string str2;
-    cin >> str2;
-    stringstream ss2(str2);
-    while (ss2.good()) {
-        string substr;
-        getline(ss2, substr, ',');
-        dest.push_back(stoi(substr));
-    }
-    //f.buildGraph("smallSampleData.csv", q, airlines, flightGraph);
-    f.buildGraph("Cleaned_2018_Flights.csv", q, airlines, flightGraph);
-    BellmanFordAlgo bellmanFordAlgo;
-    DjikstrasModAlgo djikstra;
-    vector<FlightEdge> route, route2;
-    route = bellmanFordAlgo.calculateRoute(&flightGraph, flightGraph.WAC[src], dest);
-
-    auto start2 = std::chrono::high_resolution_clock::now();
-    route2 = bellmanFordAlgo.calculateRoute(&flightGraph, flightGraph.WAC[src], dest);
-    auto stop2 = std::chrono::high_resolution_clock::now();
-    auto duration2 = chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
-
-    auto start = std::chrono::high_resolution_clock::now();
-    route = djikstra.calculateRoute(&flightGraph, flightGraph.WAC[src], dest);
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<std::chrono::microseconds>(stop - start);
-
-    cout << "Bellman Ford Output:" << endl;
-    string out = flightGraph.routeText(route2);
-    cout << out << endl;
-    cout << "Bellman Ford Algorithm Time: " << duration2.count() << " microseconds" << endl;
-    cout << "---------------------------------------------------------------------------------" << endl;
-    cout << "Djikstra Output:" << endl;
-    string out2 = flightGraph.routeText(route);
-    cout << out2 << endl;
-    cout << "Dijkstra Algorithm Time: " << duration.count() << " microseconds" << endl;
-    //for (int i = 0; i < route.size(); i++) {
-    //     FlightEdge e = route.at(i);
-    //     cout << flightGraph.getLocFromAC(e.originWAC) << "--->" <<
-    //         flightGraph.getLocFromAC(e.destWAC) << "; Price: $" << e.price << "; Airline: " <<
-    //         flightGraph.getAirlineFromCode(e.airlineCode) << endl;
-    // }
-
-     
-}
-*/
-//Test Flight Data Cleaned_2018_Flights
